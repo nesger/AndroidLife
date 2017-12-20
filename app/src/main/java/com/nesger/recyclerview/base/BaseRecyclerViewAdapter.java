@@ -1,4 +1,4 @@
-package com.nesger.androidlife.recycleview;
+package com.nesger.recyclerview.base;
 
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.nesger.androidlife.R;
+import com.nesger.recyclerview.R;
 
 import java.util.List;
 
@@ -14,12 +14,12 @@ import java.util.List;
  * Created by GT on 2017/11/23.
  */
 
-public class MainAdapter extends RecyclerView.Adapter<MainViewHolder> {
+public class BaseRecyclerViewAdapter extends RecyclerView.Adapter<BaseRecyclerViewViewHolder> {
 
     private Activity activity;
     private List<String> itemList;
 
-    public MainAdapter(Activity activity, List<String> itemList) {
+    public BaseRecyclerViewAdapter(Activity activity, List<String> itemList) {
         if (activity == null || itemList == null) {
             throw new IllegalArgumentException("params can't be null");
         }
@@ -28,13 +28,13 @@ public class MainAdapter extends RecyclerView.Adapter<MainViewHolder> {
     }
 
     @Override
-    public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BaseRecyclerViewViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_main, parent, false);
-        return new MainViewHolder(view);
+        return new BaseRecyclerViewViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(MainViewHolder holder, int position) {
+    public void onBindViewHolder(BaseRecyclerViewViewHolder holder, int position) {
         holder.mTxtTitle.setText(itemList.get(position));
     }
 

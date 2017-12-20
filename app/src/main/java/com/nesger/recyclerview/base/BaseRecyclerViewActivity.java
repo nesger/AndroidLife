@@ -1,4 +1,4 @@
-package com.nesger.androidlife;
+package com.nesger.recyclerview.base;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -6,7 +6,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.nesger.androidlife.recycleview.MainAdapter;
+import com.nesger.recyclerview.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,12 +15,12 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class BaseRecyclerViewActivity extends AppCompatActivity {
 
 
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
-    private MainAdapter mAdapter;
+    private BaseRecyclerViewAdapter mAdapter;
     private List<String> mItemList = new ArrayList<>();
 
     @Override
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         //添加分割线
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         //设置适配器
-        mAdapter = new MainAdapter(this, mItemList);
+        mAdapter = new BaseRecyclerViewAdapter(this, mItemList);
         mRecyclerView.setAdapter(mAdapter);
     }
 

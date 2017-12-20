@@ -1,4 +1,4 @@
-package com.nesger.androidlife.utils;
+package com.nesger.recyclerview.utils;
 
 import android.util.Log;
 

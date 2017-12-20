@@ -1,4 +1,4 @@
-package com.nesger.androidlife;
+package com.nesger.recyclerview;
 
 import org.junit.Test;
 
