@@ -42,6 +42,11 @@ public class DragVerticalRecyclerViewActivity extends AppCompatActivity {
     }
 
     private ItemTouchHelper mItemTouchHelper;
+
+    public ItemTouchHelper getItemTouchHelper() {
+        return mItemTouchHelper;
+    }
+
     private void initRecyclerView() {
         //设置子视图
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -50,7 +55,6 @@ public class DragVerticalRecyclerViewActivity extends AppCompatActivity {
         //设置适配器
         mAdapter = new DragVerticalRecyclerViewAdapter(this, mItemList);
         mRecyclerView.setAdapter(mAdapter);
-
 
         //先实例化Callback
         ItemTouchHelper.Callback callback = new DragItemTouchHelperCallback(mAdapter);

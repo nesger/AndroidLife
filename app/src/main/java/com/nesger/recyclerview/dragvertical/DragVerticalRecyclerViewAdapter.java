@@ -2,7 +2,9 @@ package com.nesger.recyclerview.dragvertical;
 
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -35,8 +37,18 @@ public class DragVerticalRecyclerViewAdapter extends RecyclerView.Adapter<DragVe
     }
 
     @Override
-    public void onBindViewHolder(DragVerticalRecyclerViewViewHolder holder, int position) {
+    public void onBindViewHolder(final DragVerticalRecyclerViewViewHolder holder, int position) {
         holder.mTxtTitle.setText(itemList.get(position));
+        holder.itemView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                ItemTouchHelper itemTouchHelper = ((DragVerticalRecyclerViewActivity) (activity)).getItemTouchHelper();
+                if (itemTouchHelper != null) {
+                    itemTouchHelper.startDrag(holder);
+                }
+                return true;
+            }
+        });
     }
 
     @Override

@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">AndroidLife</string>
-    <string name="item_one">RecyclerView点击监听</string>
-    <string name="item_two">RecyclerView上下拖拽</string>
+    <string name="item_one">1</string>
+    <string name="item_two">2</string>
+    <string name="item_three">3</string>
+    <string name="item_four">4</string>
+    <string name="item_five">5</string>
+    <string name="item_six">6</string>
 </resources>

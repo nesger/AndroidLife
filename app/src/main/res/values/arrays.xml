@@ -3,5 +3,9 @@
     <string-array name="item_list">
         <item>@string/item_one</item>
         <item>@string/item_two</item>
+        <item>@string/item_three</item>
+        <item>@string/item_four</item>
+        <item>@string/item_five</item>
+        <item>@string/item_six</item>
     </string-array>
 </resources>
