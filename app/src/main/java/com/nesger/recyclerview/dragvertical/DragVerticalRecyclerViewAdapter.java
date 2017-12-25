@@ -2,11 +2,10 @@ package com.nesger.recyclerview.dragvertical;
 
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.nesger.recyclerview.R;
 
@@ -39,16 +38,16 @@ public class DragVerticalRecyclerViewAdapter extends RecyclerView.Adapter<DragVe
     @Override
     public void onBindViewHolder(final DragVerticalRecyclerViewViewHolder holder, int position) {
         holder.mTxtTitle.setText(itemList.get(position));
-        holder.itemView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                ItemTouchHelper itemTouchHelper = ((DragVerticalRecyclerViewActivity) (activity)).getItemTouchHelper();
-                if (itemTouchHelper != null) {
-                    itemTouchHelper.startDrag(holder);
-                }
-                return true;
-            }
-        });
+//        holder.itemView.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                ItemTouchHelper itemTouchHelper = ((DragVerticalRecyclerViewActivity) (activity)).getItemTouchHelper();
+//                if (itemTouchHelper != null) {
+//                    itemTouchHelper.startDrag(holder);
+//                }
+//                return true;
+//            }
+//        });
     }
 
     @Override
@@ -67,5 +66,19 @@ public class DragVerticalRecyclerViewAdapter extends RecyclerView.Adapter<DragVe
          * 通知数据移动
          */
         notifyItemMoved(fromPosition, toPosition);
+    }
+
+    @Override
+    public void onSwipeRight(int position) {
+        itemList.remove(position);
+        notifyItemRemoved(position);
+        Toast.makeText(activity, "swipe right", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onSwipeLift(int position) {
+        itemList.remove(position);
+        notifyItemRemoved(position);
+        Toast.makeText(activity, "swipe left", Toast.LENGTH_SHORT).show();
     }
 }

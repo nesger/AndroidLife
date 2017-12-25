@@ -10,4 +10,10 @@ public interface OnItemCallbackListener {
      * @param toPosition   移动的位置
      */
     void onMove(int fromPosition, int toPosition);
+
+    //右滑
+    void onSwipeRight(int position);
+
+    //左滑
+    void onSwipeLift(int position);
 }

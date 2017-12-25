@@ -20,12 +20,14 @@ public class DragItemTouchHelperCallback extends ItemTouchHelper.Callback {
     public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
         //设置为可上下拖拽
         int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
-        return makeMovementFlags(dragFlags, 0);
+        //设置侧滑方向为左右
+        int swipeFlags = ItemTouchHelper.START | ItemTouchHelper.END;
+        return makeMovementFlags(dragFlags, swipeFlags);
     }
 
     @Override
     public boolean isLongPressDragEnabled() {
-        return false;
+        return true;
     }
 
     @Override
@@ -39,7 +41,13 @@ public class DragItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-
+        if (direction == ItemTouchHelper.END) {
+            //Item滑动方向为右
+            mOnItemCallbackListener.onSwipeRight(viewHolder.getAdapterPosition());
+        } else if (direction == ItemTouchHelper.START) {
+            //Item滑动方向为左
+            mOnItemCallbackListener.onSwipeLift(viewHolder.getAdapterPosition());
+        }
     }
 
 }
