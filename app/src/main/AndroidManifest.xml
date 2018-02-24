@@ -11,6 +11,11 @@
         <activity
             android:name=".base.BaseRecyclerViewActivity"
             android:label="RecyclerView基本使用">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity
@@ -21,11 +26,6 @@
         <activity
             android:name=".dragvertical.DragVerticalRecyclerViewActivity"
             android:label="RecyclerView上下滑动">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

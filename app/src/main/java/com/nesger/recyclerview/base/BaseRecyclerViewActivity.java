@@ -14,6 +14,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 
 public class BaseRecyclerViewActivity extends AppCompatActivity {
 
@@ -49,6 +50,8 @@ public class BaseRecyclerViewActivity extends AppCompatActivity {
         //设置适配器
         mAdapter = new BaseRecyclerViewAdapter(this, mItemList);
         mRecyclerView.setAdapter(mAdapter);
+        // Vertical
+        OverScrollDecoratorHelper.setUpOverScroll(mRecyclerView, OverScrollDecoratorHelper.ORIENTATION_VERTICAL);
     }
 
 }
