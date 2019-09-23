@@ -35,11 +35,12 @@ public class RecyclerViewActivity extends AppCompatActivity {
         initRecyclerView();
     }
 
+    final int ITEM_COUNT = 20;
     /**
      * 获取数据源
      */
     private void initData() {
-        for (int i = 1; i < 50; i++) {
+        for (int i = 1; i <= ITEM_COUNT; i++) {
             mItemList.add(System.currentTimeMillis() + 3600 * 1000 * i);
         }
     }
