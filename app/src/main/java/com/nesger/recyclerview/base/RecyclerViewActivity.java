@@ -1,28 +1,30 @@
-package com.nesger.recyclerview.dragvertical;
+package com.nesger.recyclerview.base;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 
 import com.nesger.recyclerview.R;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 
-public class DragVerticalRecyclerViewActivity extends AppCompatActivity {
+/**
+ * @author Zengyu.Zhan
+ */
+public class RecyclerViewActivity extends AppCompatActivity {
 
 
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
-    private DragVerticalRecyclerViewAdapter mAdapter;
-    private List<String> mItemList = new ArrayList<>();
+    private RecyclerViewAdapter mAdapter;
+    private List<Long> mItemList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,15 +39,11 @@ public class DragVerticalRecyclerViewActivity extends AppCompatActivity {
      * 获取数据源
      */
     private void initData() {
-        String[] itemList = getResources().getStringArray(R.array.item_list);
-        mItemList.addAll(Arrays.asList(itemList));
+        for (int i = 1; i < 50; i++) {
+            mItemList.add(System.currentTimeMillis() + 3600 * 1000 * i);
+        }
     }
 
-    private ItemTouchHelper mItemTouchHelper;
-
-    public ItemTouchHelper getItemTouchHelper() {
-        return mItemTouchHelper;
-    }
 
     private void initRecyclerView() {
         //设置子视图
@@ -53,15 +51,10 @@ public class DragVerticalRecyclerViewActivity extends AppCompatActivity {
         //添加分割线
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         //设置适配器
-        mAdapter = new DragVerticalRecyclerViewAdapter(this, mItemList);
+        mAdapter = new RecyclerViewAdapter(this, mItemList);
         mRecyclerView.setAdapter(mAdapter);
-
-        //先实例化Callback
-        ItemTouchHelper.Callback callback = new DragItemTouchHelperCallback(mAdapter);
-        //用Callback构造ItemtouchHelper
-        mItemTouchHelper = new ItemTouchHelper(callback);
-        //调用ItemTouchHelper的attachToRecyclerView方法建立联系
-        mItemTouchHelper.attachToRecyclerView(mRecyclerView);
+        // Vertical
+        OverScrollDecoratorHelper.setUpOverScroll(mRecyclerView, OverScrollDecoratorHelper.ORIENTATION_VERTICAL);
     }
 
 }

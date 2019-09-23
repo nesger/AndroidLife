@@ -1,4 +1,4 @@
-package com.nesger.recyclerview.dragvertical;
+package com.nesger.recyclerview.base;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -10,15 +10,18 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by Zengyu.Zhan on 2017/11/23.
+ * @author Zengyu.Zhan
+ * Created on 2017/11/23.
  */
 
-public class DragVerticalRecyclerViewViewHolder extends RecyclerView.ViewHolder {
+public class RecyclerViewViewHolder extends RecyclerView.ViewHolder {
 
     @BindView(R.id.txt_title)
     TextView mTxtTitle;
+    @BindView(R.id.tv_num)
+    TextView mTvNum;
 
-    public DragVerticalRecyclerViewViewHolder(View itemView) {
+    public RecyclerViewViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
     }
