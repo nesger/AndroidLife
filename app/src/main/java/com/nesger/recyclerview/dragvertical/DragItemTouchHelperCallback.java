@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
 /**
- * Created by GT on 2017/12/20.
+ * Created by Zengyu.Zhan on 2017/12/20.
  */
 
 public class DragItemTouchHelperCallback extends ItemTouchHelper.Callback {

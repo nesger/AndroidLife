@@ -13,7 +13,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Created by GT on 2017/11/23.
+ * Created by Zengyu.Zhan on 2017/11/23.
  */
 
 public class DragVerticalRecyclerViewAdapter extends RecyclerView.Adapter<DragVerticalRecyclerViewViewHolder> implements OnItemCallbackListener{

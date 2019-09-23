@@ -11,7 +11,7 @@ import com.nesger.recyclerview.R;
 import java.util.List;
 
 /**
- * Created by GT on 2017/11/23.
+ * Created by Zengyu.Zhan on 2017/11/23.
  */
 
 public class BaseRecyclerViewAdapter extends RecyclerView.Adapter<BaseRecyclerViewViewHolder> {

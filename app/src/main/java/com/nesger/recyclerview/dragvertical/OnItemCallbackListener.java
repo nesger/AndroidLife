@@ -1,7 +1,7 @@
 package com.nesger.recyclerview.dragvertical;
 
 /**
- * Created by GT on 2017/11/15.
+ * Created by Zengyu.Zhan on 2017/11/15.
  */
 
 public interface OnItemCallbackListener {
