@@ -52,6 +52,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewViewHo
 
         content = "剩下"+remainTime+"秒";
         holder.mTxtTitle.setText(content);
+        holder.mTxtTitle.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                updateTime(holder, time);
+            }
+        }, 1000);
     }
 
     @Override
