@@ -39,7 +39,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewViewHo
         mExecutorService = new ScheduledThreadPoolExecutor(1, new ThreadFactory() {
             @Override
             public Thread newThread(@NonNull Runnable r) {
-                return new Thread(r);
+                Thread thread = new Thread(r);
+                thread.setName("countdown");
+                return thread;
             }
         });
         mExecutorService.scheduleAtFixedRate(new Runnable() {
