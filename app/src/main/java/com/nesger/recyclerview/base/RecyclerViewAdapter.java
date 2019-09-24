@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import com.nesger.recyclerview.R;
 
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * @author Zengyu.Zhan
@@ -52,6 +54,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewViewHo
 
         content = "剩下"+remainTime+"秒";
         holder.mTxtTitle.setText(content);
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                updateTime(holder, time);
+            }
+        }, 1000);
     }
 
     @Override
