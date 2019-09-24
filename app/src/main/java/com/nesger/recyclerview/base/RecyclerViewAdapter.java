@@ -8,8 +8,6 @@ import android.view.ViewGroup;
 
 import com.nesger.recyclerview.R;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -39,7 +37,21 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewViewHo
     @Override
     public void onBindViewHolder(RecyclerViewViewHolder holder, int position) {
         holder.mTvNum.setText(String.valueOf(position + 1));
-        holder.mTxtTitle.setText(formatDate(itemList.get(position)));
+        updateTime(holder, itemList.get(position));
+    }
+
+    private void updateTime(final RecyclerViewViewHolder holder, final long time) {
+        String content;
+        long remainTime = time - System.currentTimeMillis();
+        remainTime /= 1000;
+        if (remainTime <= 0) {
+            content = "Time up";
+            holder.mTxtTitle.setText(content);
+            return;
+        }
+
+        content = "剩下"+remainTime+"秒";
+        holder.mTxtTitle.setText(content);
     }
 
     @Override
@@ -47,10 +59,4 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewViewHo
         return itemList.size();
     }
 
-
-
-    public static  String formatDate(long dateTime) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return sdf.format(new Date(dateTime));
-    }
 }
