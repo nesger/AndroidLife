@@ -1,6 +1,7 @@
 package com.nesger.recyclerview.base;
 
 import android.app.Activity;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +12,10 @@ import com.nesger.recyclerview.R;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Zengyu.Zhan
@@ -23,8 +26,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewViewHo
 
     private Activity activity;
     private List<Long> itemList;
-    private Timer mTimer;
     private Set<RecyclerViewViewHolder> mHolders;
+    private ScheduledExecutorService mExecutorService;
 
     public RecyclerViewAdapter(Activity activity, List<Long> itemList) {
         if (activity == null || itemList == null) {
@@ -33,15 +36,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewViewHo
         this.activity = activity;
         this.itemList = itemList;
         mHolders = new HashSet<>();
-        mTimer = new Timer();
-        mTimer.scheduleAtFixedRate(new TimerTask() {
+        mExecutorService = new ScheduledThreadPoolExecutor(1, new ThreadFactory() {
+            @Override
+            public Thread newThread(@NonNull Runnable r) {
+                return new Thread(r);
+            }
+        });
+        mExecutorService.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
                 for (RecyclerViewViewHolder holder : mHolders) {
                     updateTime(holder, holder.getTime());
                 }
             }
-        }, 0, 1000);
+        }, 0, 1000, TimeUnit.MILLISECONDS);
     }
 
     @Override
