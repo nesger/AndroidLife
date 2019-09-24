@@ -8,9 +8,11 @@ import android.view.ViewGroup;
 
 import com.nesger.recyclerview.R;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * @author Zengyu.Zhan
@@ -21,6 +23,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewViewHo
 
     private Activity activity;
     private List<Long> itemList;
+    private Timer mTimer;
+    private Set<RecyclerViewViewHolder> mHolders;
 
     public RecyclerViewAdapter(Activity activity, List<Long> itemList) {
         if (activity == null || itemList == null) {
@@ -28,6 +32,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewViewHo
         }
         this.activity = activity;
         this.itemList = itemList;
+        mHolders = new HashSet<>();
+        mTimer = new Timer();
+        mTimer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                for (RecyclerViewViewHolder holder : mHolders) {
+                    updateTime(holder, holder.getTime());
+                }
+            }
+        }, 0, 1000);
     }
 
     @Override
@@ -38,8 +52,24 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewViewHo
 
     @Override
     public void onBindViewHolder(RecyclerViewViewHolder holder, int position) {
+        holder.setTime(itemList.get(position));
+        mHolders.add(holder);
         holder.mTvNum.setText(String.valueOf(position + 1));
-        holder.mTxtTitle.setText(formatDate(itemList.get(position)));
+        updateTime(holder, itemList.get(position));
+    }
+
+    private void updateTime(final RecyclerViewViewHolder holder, final long time) {
+        String content;
+        long remainTime = time - System.currentTimeMillis();
+        remainTime /= 1000;
+        if (remainTime <= 0) {
+            content = "Time up";
+            holder.mTxtTitle.setText(content);
+            return;
+        }
+
+        content = "剩下"+remainTime+"秒";
+        holder.mTxtTitle.setText(content);
     }
 
     @Override
@@ -47,10 +77,4 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewViewHo
         return itemList.size();
     }
 
-
-
-    public static  String formatDate(long dateTime) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return sdf.format(new Date(dateTime));
-    }
 }
